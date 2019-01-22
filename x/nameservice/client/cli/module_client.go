@@ -32,3 +32,17 @@ func (mc ModuleClient) GetQueryCmd() *cobra.Command  {
 	)...)
 	return govQueryCmd
 }
+
+
+// GetTxCmd - returns the transaction commands for this module
+func (mc ModuleClient) GetTxCmd() *cobra.Command  {
+	govTxCmd := &cobra.Command {
+		Use: 	"nameservice",
+		Short:	"Nameservice transactions subcommands"
+	}
+	govTxCmd.AddCommand(client.PostCommands(
+		nameservicecmd.GetCmdBuyName(mc.cdc),
+		nameservicecmd.GetCmdSetName(mc.cdc)
+	)...)
+	return govTxCmd
+}
